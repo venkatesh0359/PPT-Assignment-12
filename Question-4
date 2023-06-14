@@ -1,1 +1,59 @@
+public class Question4 {
+
+  public static boolean isPalindrome(Node head) {
+    if (head == null) {
+      return true;
+    }
+
+    Node slow = head;
+    Node fast = head;
+
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    Node prev = null;
+    while (slow != null) {
+      Node next_node = slow.next;
+      slow.next = prev;
+      prev = slow;
+      slow = next_node;
+    }
+
+    while (head != null && prev != null) {
+      if (head.data != prev.data) {
+        return false;
+      }
+      head = head.next;
+      prev = prev.next;
+    }
+
+    return true;
+  }
+
+  public static void main(String[] args) {
+    Node head = new Node('R');
+    head.next = new Node('A');
+    head.next.next = new Node('D');
+    head.next.next.next = new Node('A');
+    head.next.next.next.next = new Node('R');
+
+    boolean isPalindrome = isPalindrome(head);
+
+    System.out.println("Is palindrome: " + isPalindrome);
+  }
+
+}
+
+class Node {
+
+  char data;
+  Node next;
+
+  public Node(char data) {
+    this.data = data;
+    this.next = null;
+  }
+}
 
