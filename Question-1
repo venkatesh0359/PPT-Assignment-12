@@ -1,1 +1,52 @@
+public class Question1 {
+
+  public static Node deleteMiddleNode(Node head) {
+    if (head == null || head.next == null) {
+      return head;
+    }
+
+    Node slow = head;
+    Node fast = head;
+
+    while (fast.next != null && fast.next.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    Node toDelete = slow.next;
+
+    slow.next = toDelete.next;
+
+    toDelete = null;
+
+    return head;
+  }
+
+  public static void main(String[] args) {
+    Node head = new Node(1);
+    head.next = new Node(2);
+    head.next.next = new Node(3);
+    head.next.next.next = new Node(4);
+    head.next.next.next.next = new Node(5);
+
+    Node newHead = deleteMiddleNode(head);
+
+    System.out.println(newHead.data);
+
+    System.out.println(newHead.next.data);
+
+    System.out.println(newHead.next.next.data);
+  }
+}
+
+class Node {
+
+  int data;
+  Node next;
+
+  public Node(int data) {
+    this.data = data;
+    this.next = null;
+  }
+}
 
